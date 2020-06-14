@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Headlines</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ng-template [ngIf]="headlines!=null">
+ <ion-grid>
+   <ion-row>
+     <ion-col>
+       <ion-list>
+        <ion-item  *ngFor="let news of headlines.value">
+          <ion-thumbnail slot="start">
+            <ion-img [src]="news.image.thumbnail.contentUrl"></ion-img>
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{news.name}}</h2>
+            <p>{{news.description}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+     </ion-col>
+   </ion-row>
+ </ion-grid>
+  </ng-template>
+</ion-content>
