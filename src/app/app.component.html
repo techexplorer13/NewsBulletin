@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-menu side="start">
+  <ion-menu side="start" (ionWillOpen)="isUserLoggedIn()">
     <ion-header>
       <ion-toolbar>
         <ion-title>
@@ -9,10 +9,16 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item>
-          <ion-icon name="business" slot="start"></ion-icon>
+      <ion-menu-toggle>
+        <ion-item routerLink="/home/login" *ngIf="!isAuth">
           <ion-label>Login</ion-label>
         </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle>
+        <ion-item button (click)="logout()" *ngIf="isAuth">
+          <ion-label>Logout</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
       </ion-list>
     </ion-content>
   </ion-menu>

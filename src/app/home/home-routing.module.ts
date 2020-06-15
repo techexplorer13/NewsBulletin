@@ -20,7 +20,7 @@ const routes: Routes = [
         children:[{
           path: '',
           loadChildren: () => import('./accountinfo/accountinfo.module').then( m => m.AccountinfoPageModule),
-          canLoad:[AuthGuard]
+          canActivate:[AuthGuard]
         }],
        
       },
