@@ -13,10 +13,14 @@ export class AuthService {
  constructor() { }
 
  login(){
-   this.isUserAuthenticated=true
+  this.isUserAuthenticated=true;
  }
 
  logout(){
    this.isUserAuthenticated=false
+ }
+
+ fbLogin(){
+   return;
  }
 }

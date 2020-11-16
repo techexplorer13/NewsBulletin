@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private url:string="https://bing-news-search1.p.rapidapi.com/news/search?count=10&freshness=Day&textFormat=Raw&safeSearch=Off&q=headlines"
+  private url:string="https://bing-news-search1.p.rapidapi.com/news/search?count=10&freshness=Day&textFormat=Raw&safeSearch=Off&q=";
   constructor(private http:HttpClient) { }
 
   private httpheaders:HttpHeaders=new HttpHeaders()
@@ -15,7 +15,7 @@ export class ApiService {
   .append("x-bingapis-sdk", "true")
   
 
-  public getHeadlines():Observable<any>{
-    return this.http.get(this.url,{headers:this.httpheaders});
+  public getHeadlines(type:string):Observable<any>{
+    return this.http.get(this.url+type,{headers:this.httpheaders});
   }
 }

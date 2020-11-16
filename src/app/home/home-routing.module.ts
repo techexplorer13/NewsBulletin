@@ -32,6 +32,10 @@ const routes: Routes = [
         }],
       },
       {
+        path:'',
+        redirectTo:'headlines'
+      },
+      {
         path: 'login',
         children:[{
           path: '',

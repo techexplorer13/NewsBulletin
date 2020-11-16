@@ -1,10 +1,9 @@
 import { Component, OnChanges, AfterViewInit } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './home/service/auth.service';
 import {Router} from '@angular/router'
+import {Plugins,Capacitor} from '@capacitor/core'
 
 @Component({
   selector: 'app-root',
@@ -15,8 +14,6 @@ export class AppComponent {
   private isAuth:boolean=false;
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
     private authService:AuthService,
     private router:Router
   ) {
@@ -25,8 +22,9 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+     if(Capacitor.isPluginAvailable('SplashScreen')){
+       Plugins.SplashScreen.hide()
+     }
     });
   }
 

@@ -19,4 +19,8 @@ export class LoginPage implements OnInit {
     this.router.navigateByUrl('/home/accountinfo')
   }
 
+  fblogin(){
+    this.authService.fbLogin();
+  }
+
 }
