@@ -1,5 +1,8 @@
 {
   "name": "newsbulletin",
-  "integrations": {},
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
   "type": "angular"
 }

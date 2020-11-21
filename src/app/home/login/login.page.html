@@ -7,33 +7,15 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-        <ion-label position="floating">UserName</ion-label>
-        <ion-input clearInput></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-        <ion-label position="floating">Password</ion-label>
-        <ion-input clearInput></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button color="primary" slot="" (click)="login()" padding>Login</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid>
-    <ion-row>
+  <ion-grid (click)="fblogin()"  *ngIf="!isAuth">
+   <ion-row>
       <ion-col size="3" offset="5">
-        <ion-icon color="primary" size="large" (click)="fblogin()" name="logo-facebook"></ion-icon>
+        <ion-icon color="primary" size="large"  name="logo-facebook"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col style="text-align: center;">
+          Continue with Facebook
       </ion-col>
     </ion-row>
   </ion-grid>
