@@ -18,7 +18,7 @@ export class HeadlinesPage implements OnInit {
   ngOnInit() {
   this.loadingCtrl.create({spinner:"bubbles",message:"loading.."}).then(loadingel=>{
     loadingel.present();
-       this.fetchHeadLines("headlines",loadingel)
+     this.fetchHeadLines("headlines",loadingel)
    setTimeout(() => {
      loadingel.dismiss()
    }, 1200);
@@ -37,7 +37,7 @@ export class HeadlinesPage implements OnInit {
     console.log(event.detail)
     this.loadingCtrl.create({spinner:"bubbles",message:"loading.."}).then(loadingel=>{
       loadingel.present();
-       this.fetchHeadLines(event.detail.value,loadingel)
+     this.fetchHeadLines(event.detail.value,loadingel)
       setTimeout(() => {
         loadingel.dismiss()
       }, 1200);

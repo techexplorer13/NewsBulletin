@@ -35,4 +35,9 @@ export class ApiService {
   public getUserInfo(): LoginUserInfo {
     return this.userInfoSubject.value;
   }
+
+  public getNews(cat:string):Observable<any>{
+    console.log(cat+"::==>inside api");
+    return this.http.get(this.url + cat,{headers:this.httpheaders});
+  }
 }

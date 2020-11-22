@@ -1,0 +1,52 @@
+{
+    "information": [
+        {
+            "cat": "Science",
+            "datePublished": "2020-11-21T23:35:00.0000000Z",
+            "value": [
+                {
+                    "name": "Science reveals secrets of a mummy's portrait",
+                    "description": "How much information can you get from a speck of purple pigment, no bigger than the diameter of a hair, plucked from an Egyptian portrait that's nearly 2,000 years old? Plenty, according to a new study.",
+                    "image": {
+                        "thumbnail": {
+                            "contentUrl": "https://www.bing.com/th?id=AR_86fc76bc7af42f11cf6168b80ad8388a&pid=news"
+                        },
+                        "url": "https://www.sciencedaily.com/releases/2020/11/201121104311.htm"
+                    }
+                }
+            ]
+        },
+        {
+            "cat": "Finance",
+            "datePublished": "2020-11-21T23:35:00.0000000Z",
+            "value": [
+                {
+                    "name": "Science reveals secrets of a mummy's portrait",
+                    "description": "How much information can you get from a speck of purple pigment, no bigger than the diameter of a hair, plucked from an Egyptian portrait that's nearly 2,000 years old? Plenty, according to a new study.",
+                    "image": {
+                        "thumbnail": {
+                            "contentUrl": "https://www.bing.com/th?id=AR_86fc76bc7af42f11cf6168b80ad8388a&pid=news"
+                        },
+                        "url": "https://www.sciencedaily.com/releases/2020/11/201121104311.htm"
+                    }
+                }
+            ]
+        },
+        {
+            "cat": "Regional",
+            "datePublished": "2020-11-21T23:35:00.0000000Z",
+            "value": [
+                {
+                    "name": "Science reveals secrets of a mummy's portrait",
+                    "description": "How much information can you get from a speck of purple pigment, no bigger than the diameter of a hair, plucked from an Egyptian portrait that's nearly 2,000 years old? Plenty, according to a new study.",
+                    "image": {
+                        "thumbnail": {
+                            "contentUrl": "https://www.bing.com/th?id=AR_86fc76bc7af42f11cf6168b80ad8388a&pid=news"
+                        },
+                        "url": "https://www.sciencedaily.com/releases/2020/11/201121104311.htm"
+                    }
+                }
+            ]
+        }
+    ]
+}
