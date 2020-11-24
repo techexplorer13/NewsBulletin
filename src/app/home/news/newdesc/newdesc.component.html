@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancelModal()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Article</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-img [src]="newdesc.image?newdesc.image.thumbnail.contentUrl:'assets/icon/noimage.png'"></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle>{{newdesc._type}}</ion-card-subtitle>
+      <ion-card-title>{{newdesc.name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{newdesc.description}}
+    </ion-card-content>
+    <ion-card-content>
+      <ion-button (click)="openLink(newdesc.url)" fill="clear" slot="end">Read More</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

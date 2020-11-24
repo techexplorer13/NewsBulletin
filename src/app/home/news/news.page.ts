@@ -3,6 +3,7 @@ import { ApiService } from '../service/api.service';
 import { TestService } from '../service/testService';
 import { LoadingController } from '@ionic/angular';
 import {ModalController} from  '@ionic/angular';
+import { NewdescComponent } from './newdesc/newdesc.component';
 
 @Component({
   selector: 'app-news',
@@ -54,5 +55,12 @@ export class NewsPage implements OnInit {
   toggleSection(index) {
     this.information[index].open = !this.information[index].open
     this.information.filter((item,itemIndex)=> itemIndex!=index).map(item=>item.open=false)
+  }
+
+  openModal(index:any,parentIndex:any){
+    this.modalCtrl.create({component:NewdescComponent,
+                          componentProps:{newdesc:this.information[parentIndex].value[index]}})
+                          .then(modalel=>
+      modalel.present())
   }
 }
