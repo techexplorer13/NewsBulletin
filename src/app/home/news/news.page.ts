@@ -30,8 +30,8 @@ export class NewsPage implements OnInit {
       //this.fetchNewsByCategories(this.categories[0])
       setTimeout(() => {
         loadingel.dismiss()
-        console.log(this.information)
-        this.selectedCat = this.information[0]
+        this.selectedCat = this.information.filter(value=>value.cat===this.categories[0])[0]
+        this.information[0].activated=true;
       }, 1200)
     })
 
@@ -48,7 +48,6 @@ export class NewsPage implements OnInit {
         this.information.push(res.information[2])
       })*/
     this.apiService.getNews(cat).subscribe(res => {
-      console.log(res)
       res.cat = cat;
       this.information.push(res);
     })
@@ -56,8 +55,9 @@ export class NewsPage implements OnInit {
   }
 
   toggleSection(event:CustomEvent<SegmentChangeEventDetail>) {
-    console.log(event.detail.value)
+    console.log("selected :"+event.detail.value)
     this.selectedCat = this.information.filter(value => value.cat === event.detail.value)[0];
+    this.information[0].activated=false;
     if (this.selectedCat == null) {
       this.loadingCtrl.create({ spinner: "bubbles", message: "loading.." }).then(loadingel => {
         loadingel.present();

@@ -12,7 +12,7 @@
     <ion-row>
       <ion-col size-md="6" offset-md="3">
         <ion-segment (ionChange)="toggleSection($event)"  scrollable="true">
-          <ion-segment-button *ngFor="let cat of categories;let i=index" value={{cat}} checked="i==0?'true':'false'">
+          <ion-segment-button *ngFor="let cat of categories;let i=index" value={{cat}} [ngClass]="information[i] && information[i].activated?'segment-button-checked':''">
             {{cat}}
           </ion-segment-button>
         </ion-segment>
