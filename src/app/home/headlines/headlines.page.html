@@ -7,17 +7,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ng-template [ngIf]="headlines!=null">
-    <ion-grid>
+<ion-content>
+    <ion-grid *ngIf="headlines!=null">
       <ion-row>
         <ion-col size-md="6" offset-md="3">
-        <ion-segment (ionChange)="onFilterUpdate($event)">
-          <ion-segment-button value="World" checked>World</ion-segment-button>
-          <ion-segment-button value="Tech">Tech</ion-segment-button>
-          <ion-segment-button value="Sports">Sports</ion-segment-button>
-        </ion-segment>
-      </ion-col>
+          <ion-segment (ionChange)="onFilterUpdate($event)">
+            <ion-segment-button value="World" checked>World</ion-segment-button>
+            <ion-segment-button value="Tech">Tech</ion-segment-button>
+            <ion-segment-button value="Sports">Sports</ion-segment-button>
+          </ion-segment>
+        </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size-md="6" offset-md="3">
@@ -38,23 +37,17 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size-md="6" offset-md="3">
-              <ion-grid>
-                <ion-row *ngFor="let news of headlines.value.slice(1);let indexofele=index"
-                (click)="openHeadlinesDescModal(indexofele+1)" style="border-bottom: 1px solid cornflowerblue;">
-                  <ion-col size="3">
-                      <ion-img [src]="news.image==undefined?'none':news.image.thumbnail.contentUrl"></ion-img>
-                  </ion-col>
-                  <ion-col size="8">
-                     <p>{{news.name}}</p>
-                  </ion-col>
-                  <ion-col size="1" class="ion-align-self-center">
-                    <ion-icon name="chevron-forward-outline"></ion-icon>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-        </ion-col>
+        <ion-col>
+        <ion-list *ngIf="headlines!=null">
+          <ion-item *ngFor="let news of headlines.value.slice(1);let indexofele=index"
+            (click)="openHeadlinesDescModal(indexofele+1)" line="none">
+            <ion-thumbnail slot="start">
+              <ion-img [src]="news.image?news.image.thumbnail.contentUrl:'assets/icon/noimage.png'"></ion-img>
+            </ion-thumbnail>
+            <p>{{news.name}}</p>
+          </ion-item>
+        </ion-list>
+      </ion-col>
       </ion-row>
     </ion-grid>
-  </ng-template>
 </ion-content>

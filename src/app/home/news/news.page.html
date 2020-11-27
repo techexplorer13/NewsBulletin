@@ -8,21 +8,27 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let item of information;let i=index" class="accordion-list">
-    <ion-item (click)="toggleSection(i)">
-      <span style="width:90%">{{item.cat}}</span>
-      <ion-icon slot="end" name="arrow-down"></ion-icon>
-    </ion-item>
-
-    <div *ngIf="item.open">
-      <ion-list>
-        <ion-item *ngFor="let childItem of item.value">
-        <ion-thumbnail slot="start">
-            <ion-img  [src]="childItem.image?childItem.image.thumbnail.contentUrl:'assets/icon/noimage.png'"></ion-img>
-          </ion-thumbnail>
-          <p>{{childItem.name}}</p>
-        </ion-item>
-      </ion-list>
-    </div>
-  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-segment (ionChange)="toggleSection($event)"  scrollable="true">
+          <ion-segment-button *ngFor="let cat of categories;let i=index" value={{cat}} checked="i==0?'true':'false'">
+            {{cat}}
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list *ngIf="selectedCat != null">
+          <ion-item *ngFor="let childItem of selectedCat.value;let i=index" (click)="openModal(i)">
+            <ion-thumbnail slot="start">
+              <ion-img [src]="childItem.image?childItem.image.thumbnail.contentUrl:'assets/icon/noimage.png'"></ion-img>
+            </ion-thumbnail>
+            <p>{{childItem.name}}</p>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
