@@ -15,7 +15,7 @@ export class NewsPage implements OnInit {
 
   private categories: string[]
   private information: any[] = [];
-  @Input() private selectedCat: any;
+  private selectedCat: any;
 
   automaticClose = false;
   constructor(private apiService: ApiService, private loadingCtrl: LoadingController,

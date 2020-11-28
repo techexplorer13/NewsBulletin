@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable, BehaviorSubject } from 'rxjs';
 import { LoginUserInfo } from '../login/LoginUserInfo';
-
+import {Urls} from 'src/app/ApiUrls'
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private url: string = "https://bing-news-search1.p.rapidapi.com/news/search?count=10&freshness=Day&textFormat=Raw&safeSearch=Off&q=";
-
+  
   public userInfoSubject: BehaviorSubject<LoginUserInfo>;
 
   constructor(private http: HttpClient) { }
@@ -19,8 +18,8 @@ export class ApiService {
     .append("x-bingapis-sdk", "true")
 
 
-  public getHeadlines(type: string): Observable<any> {
-    return this.http.get(this.url + type, { headers: this.httpheaders });
+  public getHeadlines(offset: string): Observable<any> {
+    return this.http.get(Urls.HEADLINES_URL+"&offset="+offset, { headers: this.httpheaders });
   }
 
   public setUserInfo(userInfo: LoginUserInfo) {
@@ -38,6 +37,6 @@ export class ApiService {
 
   public getNews(cat:string):Observable<any>{
     console.log(cat+"::==>inside api");
-    return this.http.get(this.url + cat,{headers:this.httpheaders});
+    return this.http.get(Urls.SEARCH_URL + cat,{headers:this.httpheaders});
   }
 }

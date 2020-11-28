@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
-import {ModalController, LoadingController} from '@ionic/angular';
-import {HeadlinesdescComponent} from './headlinesdesc/headlinesdesc.component';
-import {SegmentChangeEventDetail} from '@ionic/core'
+import { ModalController, LoadingController } from '@ionic/angular';
+import { SegmentChangeEventDetail } from '@ionic/core'
+import { NewdescComponent } from '../news/newdesc/newdesc.component';
 
 @Component({
   selector: 'app-headlines',
@@ -10,46 +10,68 @@ import {SegmentChangeEventDetail} from '@ionic/core'
   styleUrls: ['./headlines.page.scss'],
 })
 export class HeadlinesPage implements OnInit {
-  headlines:any;
-  
-  constructor(private apiService:ApiService,private modalCtrl:ModalController,
-    private loadingCtrl:LoadingController) { }
+  headlines: any;
+  offset = 0;
+  maximumOffset=60; // this is maximum offset till when the query will be fired
+
+  constructor(private apiService: ApiService, private modalCtrl: ModalController,
+    private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
-  this.loadingCtrl.create({spinner:"bubbles",message:"loading.."}).then(loadingel=>{
-    loadingel.present();
-     this.fetchHeadLines("headlines",loadingel)
-   setTimeout(() => {
-     loadingel.dismiss()
-   }, 1200);
-  })
-
-  }
-
-  openHeadlinesDescModal(index:any){
-    this.modalCtrl.create({component:HeadlinesdescComponent,
-                          componentProps:{headlinesdesc:this.headlines.value[index]}})
-                          .then(modalel=>
-      modalel.present())
-  }
-
-  onFilterUpdate(event:CustomEvent<SegmentChangeEventDetail>){
-    console.log(event.detail)
-    this.loadingCtrl.create({spinner:"bubbles",message:"loading.."}).then(loadingel=>{
+    this.loadingCtrl.create({ spinner: "bubbles", message: "loading.." }).then(loadingel => {
       loadingel.present();
-     this.fetchHeadLines(event.detail.value,loadingel)
+      this.fetchHeadLines(this.offset, loadingel, null)
       setTimeout(() => {
         loadingel.dismiss()
       }, 1200);
     })
-    
+
   }
 
-  fetchHeadLines(type:string,loadingel:HTMLIonLoadingElement){
-    this.apiService.getHeadlines(type).subscribe(res=>{
+  openHeadlinesDescModal(index: any) {
+    this.modalCtrl.create({
+      component: NewdescComponent,
+      componentProps: { newdesc: this.headlines[index] }
+    })
+      .then(modalel =>
+        modalel.present())
+  }
+
+  onFilterUpdate(event: CustomEvent<SegmentChangeEventDetail>) {
+    console.log(event.detail)
+    this.loadingCtrl.create({ spinner: "bubbles", message: "loading.." }).then(loadingel => {
+      loadingel.present();
+      this.fetchHeadLines(this.offset, loadingel, null)
+      setTimeout(() => {
+        loadingel.dismiss()
+      }, 1200);
+    })
+
+  }
+
+  fetchHeadLines(offset, loadingel: HTMLIonLoadingElement, event) {
+    console.log(offset)
+    this.apiService.getHeadlines(offset).subscribe(res => {
       console.log(res)
-      this.headlines=res;
-      loadingel.dismiss();
-  })
+      if (this.headlines) {
+        this.headlines=this.headlines.concat(res.value)
+      } else {
+        this.headlines = res.value;
+      }
+      this.offset = this.offset + 20
+      if (loadingel) {
+        loadingel.dismiss();
+      }
+      if (event) {
+        event.target.complete();
+      }
+    })
+  }
+
+  loadNews(event) {
+    this.fetchHeadLines(this.offset, null,event)
+    if(this.offset===this.maximumOffset){
+      event.target.disabled=true;
+    }
   }
 }
