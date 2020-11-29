@@ -12,7 +12,7 @@ import { NewdescComponent } from '../news/newdesc/newdesc.component';
 export class HeadlinesPage implements OnInit {
   headlines: any;
   offset = 0;
-  maximumOffset=60; // this is maximum offset till when the query will be fired
+  maximumOffset = 60; // this is maximum offset till when the query will be fired
 
   constructor(private apiService: ApiService, private modalCtrl: ModalController,
     private loadingCtrl: LoadingController) { }
@@ -54,7 +54,7 @@ export class HeadlinesPage implements OnInit {
     this.apiService.getHeadlines(offset).subscribe(res => {
       console.log(res)
       if (this.headlines) {
-        this.headlines=this.headlines.concat(res.value)
+        this.headlines = this.headlines.concat(res.value)
       } else {
         this.headlines = res.value;
       }
@@ -69,9 +69,12 @@ export class HeadlinesPage implements OnInit {
   }
 
   loadNews(event) {
-    this.fetchHeadLines(this.offset, null,event)
-    if(this.offset===this.maximumOffset){
-      event.target.disabled=true;
+    this.fetchHeadLines(this.offset, null, event)
+    if (this.offset === this.maximumOffset) {
+      /**
+       * stop the scroll once maxium offset is reached
+       */
+      event.target.disabled = true;
     }
   }
 }

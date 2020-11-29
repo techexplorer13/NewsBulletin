@@ -31,4 +31,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-infinite-scroll threshold="24%" (ionInfinite)="loadCatNews($event)">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more data.."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

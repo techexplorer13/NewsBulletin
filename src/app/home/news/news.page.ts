@@ -1,10 +1,10 @@
-import { Component, OnChanges, OnInit ,Input} from '@angular/core';
+import { Component, OnChanges, OnInit, Input } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { TestService } from '../service/testService';
 import { LoadingController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { NewdescComponent } from './newdesc/newdesc.component';
-import {SegmentChangeEventDetail} from '@ionic/core'
+import { SegmentChangeEventDetail } from '@ionic/core'
 
 @Component({
   selector: 'app-news',
@@ -16,8 +16,9 @@ export class NewsPage implements OnInit {
   private categories: string[]
   private information: any[] = [];
   private selectedCat: any;
+  offset = 0;
+  maximumOffset = 20; // this is maximum offset till when the query will be fired
 
-  automaticClose = false;
   constructor(private apiService: ApiService, private loadingCtrl: LoadingController,
     private testService: TestService, private modalCtrl: ModalController) { }
 
@@ -26,18 +27,18 @@ export class NewsPage implements OnInit {
 
     this.loadingCtrl.create({ spinner: "bubbles", message: "loading.." }).then(loadingel => {
       loadingel.present();
-      this.categories.slice(0, 3).forEach((cat) => this.fetchNewsByCategories(cat));
+      this.categories.slice(0, 3).forEach((cat) => this.fetchNewsByCategories(cat, this.offset, null));
       //this.fetchNewsByCategories(this.categories[0])
       setTimeout(() => {
         loadingel.dismiss()
-        this.selectedCat = this.information.filter(value=>value.cat===this.categories[0])[0]
-        this.information[0].activated=true;
+        this.selectedCat = this.information.filter(value => value.cat === this.categories[0])[0]
+        this.information[0].activated = true;
       }, 1200)
     })
 
   }
 
-  fetchNewsByCategories(cat) {
+  fetchNewsByCategories(cat, offset, event) {
 
     /**    this.testService.getNewsTest().subscribe(res=>{
         res.information[0].open=true;
@@ -47,21 +48,33 @@ export class NewsPage implements OnInit {
         res.information[0].open=false;
         this.information.push(res.information[2])
       })*/
-    this.apiService.getNews(cat).subscribe(res => {
+    this.apiService.getNews(cat, offset).subscribe(res => {
       res.cat = cat;
-      this.information.push(res);
+      res.offset = offset + 20;
+
+      let index = this.information.findIndex(value => value.cat === cat)
+      if (index != -1) {
+        this.information[index].value = this.information[index].value.concat(res.value);
+        this.selectedCat.offset=res.offset
+      } else {
+        this.information.push(res)
+      }
+      if(event){
+        event.target.complete()
+      }
     })
 
   }
 
-  toggleSection(event:CustomEvent<SegmentChangeEventDetail>) {
-    console.log("selected :"+event.detail.value)
+  toggleSection(event: CustomEvent<SegmentChangeEventDetail>) {
+    console.log("selected :" + event.detail.value)
     this.selectedCat = this.information.filter(value => value.cat === event.detail.value)[0];
-    this.information[0].activated=false;
+    console.log(this.selectedCat)
+    this.information[0].activated = false;
     if (this.selectedCat == null) {
       this.loadingCtrl.create({ spinner: "bubbles", message: "loading.." }).then(loadingel => {
         loadingel.present();
-        this.fetchNewsByCategories(event.detail.value);
+        this.fetchNewsByCategories(event.detail.value, this.offset, null);
         setTimeout(() => {
           loadingel.dismiss();
           this.selectedCat = this.information.filter(value => value.cat === event.detail.value)[0];
@@ -70,8 +83,6 @@ export class NewsPage implements OnInit {
     }
   }
 
-  ng
-
   openModal(index: any) {
     this.modalCtrl.create({
       component: NewdescComponent,
@@ -79,6 +90,19 @@ export class NewsPage implements OnInit {
     })
       .then(modalel =>
         modalel.present())
+  }
+
+  loadCatNews(event) {
+
+    if (this.selectedCat.offset > this.maximumOffset) {
+      /**
+       * if offset is greater than maximum return dont fire api
+       */
+       event.target.complete()
+       return;
+    }
+    console.log("cat: "+this.selectedCat.cat+" offset: "+this.selectedCat.offset)
+    this.fetchNewsByCategories(this.selectedCat.cat, this.selectedCat.offset, event)
   }
 
 }

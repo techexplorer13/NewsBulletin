@@ -14,7 +14,7 @@ export class ApiService {
 
   private httpheaders: HttpHeaders = new HttpHeaders()
     .append("x-rapidapi-host", "bing-news-search1.p.rapidapi.com")
-    .append("x-rapidapi-key", "SD9BkTcTYymsh4MyQs90mUTd9jFwp1MElTejsn6gBjrBlzN3KC")
+    .append("x-rapidapi-key", "2644b7e3ecmsh8af7be1e3ac673fp1d8b7cjsnb9e085c52980")
     .append("x-bingapis-sdk", "true")
 
 
@@ -35,8 +35,8 @@ export class ApiService {
     return this.userInfoSubject.value;
   }
 
-  public getNews(cat:string):Observable<any>{
+  public getNews(cat:string,offset):Observable<any>{
     console.log(cat+"::==>inside api");
-    return this.http.get(Urls.SEARCH_URL + cat,{headers:this.httpheaders});
+    return this.http.get(Urls.SEARCH_URL + cat +"&offset="+offset,{headers:this.httpheaders});
   }
 }
