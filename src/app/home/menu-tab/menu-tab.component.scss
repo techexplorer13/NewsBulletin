@@ -3,3 +3,20 @@ img {
     border: 0;
     height: 34px;
 }
+
+.tab-buttons{
+    display: flex;
+    justify-content: space-between;
+    background-color: #3880ff;
+}
+
+.tab-button{
+   padding: 1%;
+   padding-bottom: 3%;
+}
+
+.text{
+    padding:10px;
+    font-family: Lato,sans-serif;
+    color: white;
+}

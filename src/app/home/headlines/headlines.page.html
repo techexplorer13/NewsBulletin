@@ -33,7 +33,7 @@
           <ion-item *ngFor="let news of headlines.slice(1);let indexofele=index"
             (click)="openHeadlinesDescModal(indexofele+1)" line="none">
             <ion-thumbnail slot="start">
-              <ion-img [src]="news.image?news.image.thumbnail.contentUrl:'assets/icon/noimage.png'"></ion-img>
+              <ion-img [src]="news.image && news.image.thumbnail?news.image.thumbnail.contentUrl:'assets/icon/noimage.png'"></ion-img>
             </ion-thumbnail>
             <p>{{news.name}}</p>
           </ion-item>

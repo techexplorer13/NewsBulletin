@@ -27,18 +27,16 @@ export class NewsPage implements OnInit {
 
     this.loadingCtrl.create({ spinner: "bubbles", message: "loading.." }).then(loadingel => {
       loadingel.present();
-      this.categories.slice(0, 3).forEach((cat) => this.fetchNewsByCategories(cat, this.offset, null));
+      this.categories.slice(0, 3).forEach(cat =>this.fetchNewsByCategories(cat, this.offset, null,loadingel));
       //this.fetchNewsByCategories(this.categories[0])
       setTimeout(() => {
-        loadingel.dismiss()
-        this.selectedCat = this.information.filter(value => value.cat === this.categories[0])[0]
-        this.information[0].activated = true;
-      }, 1200)
+        loadingel.dismiss();
+      }, 5000)
     })
 
   }
 
-  fetchNewsByCategories(cat, offset, event) {
+  fetchNewsByCategories(cat, offset, event,el:HTMLIonLoadingElement) {
 
     /**    this.testService.getNewsTest().subscribe(res=>{
         res.information[0].open=true;
@@ -55,11 +53,16 @@ export class NewsPage implements OnInit {
       let index = this.information.findIndex(value => value.cat === cat)
       if (index != -1) {
         this.information[index].value = this.information[index].value.concat(res.value);
-        this.selectedCat.offset=res.offset
+        this.selectedCat.offset = res.offset
       } else {
         this.information.push(res)
       }
-      if(event){
+      if(el && this.information.length>2){
+        el.dismiss();
+        this.selectedCat = this.information.filter(value => value.cat === this.categories[0])[0]
+        this.information[0].activated=true;
+      }
+      if (event) {
         event.target.complete()
       }
     })
@@ -69,12 +72,11 @@ export class NewsPage implements OnInit {
   toggleSection(event: CustomEvent<SegmentChangeEventDetail>) {
     console.log("selected :" + event.detail.value)
     this.selectedCat = this.information.filter(value => value.cat === event.detail.value)[0];
-    console.log(this.selectedCat)
     this.information[0].activated = false;
     if (this.selectedCat == null) {
       this.loadingCtrl.create({ spinner: "bubbles", message: "loading.." }).then(loadingel => {
         loadingel.present();
-        this.fetchNewsByCategories(event.detail.value, this.offset, null);
+        this.fetchNewsByCategories(event.detail.value, this.offset, null,null);
         setTimeout(() => {
           loadingel.dismiss();
           this.selectedCat = this.information.filter(value => value.cat === event.detail.value)[0];
@@ -98,11 +100,11 @@ export class NewsPage implements OnInit {
       /**
        * if offset is greater than maximum return dont fire api
        */
-       event.target.complete()
-       return;
+      event.target.complete()
+      return;
     }
-    console.log("cat: "+this.selectedCat.cat+" offset: "+this.selectedCat.offset)
-    this.fetchNewsByCategories(this.selectedCat.cat, this.selectedCat.offset, event)
+    console.log("cat: " + this.selectedCat.cat + " offset: " + this.selectedCat.offset)
+    this.fetchNewsByCategories(this.selectedCat.cat, this.selectedCat.offset, event,null)
   }
 
 }
