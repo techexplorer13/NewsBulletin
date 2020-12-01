@@ -10,26 +10,16 @@ const routes: Routes = [
     children:[
       {
         path:'news',
-        children:[{
-          path: '',
-          loadChildren: () => import('./news/news.module').then( m => m.NewsPageModule)
-        }],
+      loadChildren: () => import('./news/news.module').then( m => m.NewsPageModule)
       },
       {
         path:'accountinfo',
-        children:[{
-          path: '',
-          loadChildren: () => import('./accountinfo/accountinfo.module').then( m => m.AccountinfoPageModule),
-          canActivate:[AuthGuard]
-        }],
-       
+        loadChildren: () => import('./accountinfo/accountinfo.module').then( m => m.AccountinfoPageModule),
+        canActivate:[AuthGuard]
       },
       {
         path:'headlines',
-        children:[{
-          path: '',
-          loadChildren: () => import('./headlines/headlines.module').then( m => m.HeadlinesPageModule)
-        }],
+        loadChildren: () => import('./headlines/headlines.module').then( m => m.HeadlinesPageModule)
       },
       {
         path:'',
@@ -37,9 +27,11 @@ const routes: Routes = [
       },
       {
         path: 'login',
-        children:[{
-          path: '',
-        loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)}]
+        loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+      },
+      {
+        path: 'magazine',
+        loadChildren: () => import('./magazine/magazine.module').then( m => m.MagazinePageModule)
       }
     ]
   },
