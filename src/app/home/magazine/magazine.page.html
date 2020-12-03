@@ -1,12 +1,15 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button color="primary"></ion-menu-button>
-    </ion-buttons>
-    <ion-title color="primary">Magazine</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
- Page is under Construction
+  <form [formGroup]="searchForm">
+    <ion-searchbar  class="searchBar" formControlName="search" placeholder="Search your Book"></ion-searchbar>
+  </form>
+  <div class="booksContainer">
+    <ng-template [ngIf]="bookList && bookList.items">
+      <div class="bookInfo" *ngFor="let book of bookList.items;let i=index">
+        <div class="imgBox">
+          <img [src]="book.volumeInfo.imageLinks?book.volumeInfo.imageLinks.thumbnail:'assets/icon/noimage.png'"
+            (click)="openBookInfoModal(i)" />
+        </div>
+      </div>
+    </ng-template>
+  </div>
 </ion-content>

@@ -1,0 +1,26 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancelModal()">
+        <ion-icon  color="primary" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary">Book Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-img style="height: 214px;" [src]="bookInfo.volumeInfo.imageLinks?bookInfo.volumeInfo.imageLinks.thumbnail:'assets/icon/noimage.png'"></ion-img>
+      <ion-card-header>
+        <ion-card-subtitle class="text">{{bookInfo.volumeInfo.subtitle}}</ion-card-subtitle>
+        <ion-card-title class="text">{{bookInfo.volumeInfo.title}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="text">
+        {{bookInfo.volumeInfo.description}}
+      </ion-card-content>
+      <ion-card-content class="text">
+        <ion-label>Publisher {{bookInfo.volumeInfo.publisher}}</ion-label>
+      </ion-card-content>
+  </ion-card>
+</ion-content>

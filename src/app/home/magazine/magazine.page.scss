@@ -1,0 +1,24 @@
+.bookInfo{
+    padding-bottom: 3%;
+    box-sizing: border-box;
+    margin-bottom: 3%;
+    border-bottom: 4px solid #CCCCFF;
+}
+
+.booksContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 3%; 
+}
+
+img{
+    width: 100px;
+    height: 143px;
+}
+
+.searchBar{
+    padding-left: 7%;
+    padding-right: 7%;
+}
+

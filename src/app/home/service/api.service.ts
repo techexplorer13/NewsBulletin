@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable, BehaviorSubject } from 'rxjs';
 import { LoginUserInfo } from '../login/LoginUserInfo';
 import {Urls} from 'src/app/ApiUrls'
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +15,7 @@ export class ApiService {
 
   private httpheaders: HttpHeaders = new HttpHeaders()
     .append("x-rapidapi-host", "bing-news-search1.p.rapidapi.com")
-    .append("x-rapidapi-key", "2644b7e3ecmsh8af7be1e3ac673fp1d8b7cjsnb9e085c52980")
+    .append("x-rapidapi-key", environment.newsKey)
     .append("x-bingapis-sdk", "true")
 
 
@@ -38,5 +39,10 @@ export class ApiService {
   public getNews(cat:string,offset):Observable<any>{
     console.log(cat+"::==>inside api");
     return this.http.get(Urls.SEARCH_URL + cat +"&offset="+offset,{headers:this.httpheaders});
+  }
+
+  public getBooks(searchTxt:string):Observable<any>{
+    console.log("Text "+searchTxt)
+    return this.http.get(Urls.GOOGLE_BOOKS_API+searchTxt +"&key="+environment.googleBooksApiKey);
   }
 }
