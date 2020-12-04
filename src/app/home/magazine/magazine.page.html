@@ -6,8 +6,8 @@
     <ng-template [ngIf]="bookList && bookList.items">
       <div class="bookInfo" *ngFor="let book of bookList.items;let i=index">
         <div class="imgBox">
-          <img [src]="book.volumeInfo.imageLinks?book.volumeInfo.imageLinks.thumbnail:'assets/icon/noimage.png'"
-            (click)="openBookInfoModal(i)" />
+          <ion-img [src]="book.volumeInfo.imageLinks?book.volumeInfo.imageLinks.thumbnail:'assets/icon/noimage.png'"
+            (click)="openBookInfoModal(i)" ></ion-img>
         </div>
       </div>
     </ng-template>
