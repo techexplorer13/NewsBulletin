@@ -1,16 +1,20 @@
 <ion-tabs>
-  <div class="tab-buttons">
-    <div class="tab-button">
-      <a class="text"  [routerLink]="['/home/headlines']">Top-News</a>
-    </div>
-    <div class="tab-button">
-      <a class="text"  [routerLink]="['/home/news']">News</a>
-    </div>
-    <div class="tab-button">
-      <a class="text"  [routerLink]="['/home/magazine']">Books</a>
-    </div>
-    <div class="tab-button">
-      <a class="text"  [routerLink]="['/home/accountinfo']">For You</a>
-    </div>
-  </div>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="headlines">
+      <ion-icon name="desktop-sharp"></ion-icon>
+      <div>Top-News</div>
+    </ion-tab-button>
+    <ion-tab-button tab="news">
+      <ion-icon name="newspaper-sharp"></ion-icon>
+      <ion-label>News</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="magazine">
+      <ion-icon name="book-sharp"></ion-icon>
+      <ion-label>Books</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="accountinfo">
+      <ion-icon name="key-sharp"></ion-icon>
+      <ion-label>For-You</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
 </ion-tabs>
