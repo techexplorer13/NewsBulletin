@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable, BehaviorSubject } from 'rxjs';
 import { LoginUserInfo } from '../login/LoginUserInfo';
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ApiService {
   
-  public userInfoSubject: BehaviorSubject<LoginUserInfo>;
+  public userInfoSubject: BehaviorSubject<LoginUserInfo>=new BehaviorSubject(new LoginUserInfo);
 
   constructor(private http: HttpClient) { }
 
@@ -24,12 +24,9 @@ export class ApiService {
   }
 
   public setUserInfo(userInfo: LoginUserInfo) {
-    if (typeof this.userInfoSubject === 'undefined') {
-      this.userInfoSubject = new BehaviorSubject(userInfo)
-    }
-    else {
+  
       this.userInfoSubject.next(userInfo);
-    }
+    
   }
 
   public getUserInfo(): LoginUserInfo {

@@ -1,14 +1,21 @@
 <ion-app>
-  <ion-menu color="primary" side="start" (ionWillOpen)="isUserLoggedIn()">
-    <ion-header>
+  <ion-header translucent="true">
+    <ion-item *ngIf="userInfo.name; else notLogged">
+      <ion-img style="width:50px;height:50px" [src]="userInfo.image"></ion-img>
       <ion-toolbar>
-        <ion-item *ngIf="userInfo">
-          <ion-avatar>
-            <img [src]="userInfo.image" />
-          </ion-avatar>
-        </ion-item>
+        <ion-title size="small">Welcome ! {{userInfo.name}}</ion-title>
       </ion-toolbar>
-    </ion-header>
-  </ion-menu>
-  <ion-router-outlet main></ion-router-outlet>
+    </ion-item>
+    <ng-template #notLogged>
+      <ion-item>
+        <ion-icon name="camera-outline" size="large"></ion-icon>
+        <ion-toolbar>
+          <ion-title size="small">Welcome Guest</ion-title>
+        </ion-toolbar>
+      </ion-item>
+    </ng-template>
+  </ion-header>
+  <ion-content>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-content>
 </ion-app>

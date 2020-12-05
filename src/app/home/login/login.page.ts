@@ -9,17 +9,17 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private authService:AuthService,private router:Router) { }
-  isAuth:boolean;
+  constructor(private authService: AuthService, private router: Router) { }
+  isAuth: boolean;
   ngOnInit() {
-    this.isAuth=this.authService.getUserAuthentication()
+    this.isAuth = this.authService.getUserAuthentication()
   }
 
-  login(){
-   this.router.navigateByUrl('/home/accountinfo')
+  login() {
+    this.router.navigateByUrl('/home/accountinfo')
   }
 
-  fblogin(){
+  fblogin() {
     this.authService.fbLogin();
   }
 

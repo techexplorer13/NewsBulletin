@@ -56,5 +56,6 @@ export class AuthService {
 
   fbLogout() {
     this.fb.logout().then(res => console.log("Logged out"));
+    this.api.setUserInfo(new LoginUserInfo())
   }
 }

@@ -5,6 +5,7 @@ import { LoadingController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { NewdescComponent } from './newdesc/newdesc.component';
 import { SegmentChangeEventDetail } from '@ionic/core'
+import {LoginUserInfo} from '../login/LoginUserInfo'
 
 @Component({
   selector: 'app-news',
@@ -33,7 +34,6 @@ export class NewsPage implements OnInit {
         loadingel.dismiss();
       }, 5000)
     })
-
   }
 
   fetchNewsByCategories(cat, offset, event,el:HTMLIonLoadingElement) {

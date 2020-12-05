@@ -1,4 +1,4 @@
-import { Component, OnChanges, AfterViewInit } from '@angular/core';
+import { Component, OnChanges,OnInit, AfterViewInit } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { AuthService } from './home/service/auth.service';
@@ -11,9 +11,10 @@ import { LoginUserInfo } from './home/login/LoginUserInfo';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   private isAuth:boolean=false;
   private userInfo:LoginUserInfo;
+  
   constructor(
     private platform: Platform,
     private authService:AuthService,
@@ -29,18 +30,9 @@ export class AppComponent {
     });
   }
 
-  isUserLoggedIn(){
-    this.isAuth=this.authService.getUserAuthentication()
-    if(this.isAuth){
-      this.userInfo=this.apiService.userInfoSubject.value;
-    }else{
-      this.userInfo=null;
-    }
-  }
-
-  logout(){
-    console.log("Logginout")
-    this.authService.logout()
-    this.router.navigateByUrl('/home/login')
+  ngOnInit(){
+   this.apiService.userInfoSubject.subscribe(res=>{
+    this.userInfo=res
+   });
   }
 }
